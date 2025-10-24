@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import type { RootState } from '../../redux/store'
 import { HiOutlineUserPlus } from "react-icons/hi2";
@@ -8,10 +8,13 @@ import { CiSearch } from "react-icons/ci";
 import { locationData } from '../../utils/data';
 import InventoryTable from '../../components/inventoryTable';
 import { searchInventory } from '../../redux/slice/inventorySlice';
+import { SearchContext } from '../../App';
 
 const Quote = () => {
+        const {searchValue,setSeaechValue} = useContext(SearchContext);
+  
   const dispatch = useDispatch()
-  const [searchValue, setSearchValue] = useState('')
+  // const [searchValue, setSearchValue] = useState('')
   const userData = useSelector((state: RootState) => state.user.user)
   const inventoryData = useSelector((state: RootState) => state.inventory)
 
@@ -20,7 +23,7 @@ const Quote = () => {
   useEffect(() => {
     if (searchValue) {
       setTimeout(() => {
-        dispatch(searchInventory(searchValue))
+        // dispatch(searchInventory(searchValue))
       }, 500)
     }
   }, [searchValue])
@@ -45,7 +48,7 @@ const Quote = () => {
             <div className='flex gap-5 flex-wrap'>
               <div>
                 <div className='relative'>
-                  <input type="text" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Procedure name or code' className='bg-[#111c2d] border border-[#a4a4a442] p-3 rounded-md text-white w-[400px] focus:border-[#01C0C8] ring-[#01C0C8]' />
+                  <input type="text" value={searchValue} onChange={(e) => setSeaechValue(e.target.value)} placeholder='Procedure name or code' className='bg-[#111c2d] border border-[#a4a4a442] p-3 rounded-md text-white w-[400px] focus:border-[#01C0C8] ring-[#01C0C8]' />
                   <CiSearch className='text-white absolute top-4 left-3' />
                 </div>
                 {searchItem && <div className='text-white'>{searchItem?.map(({ name }) => <p className='p-3 rounded-md bg-[#1F2937]'>{name}</p>)}</div>

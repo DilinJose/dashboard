@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 // import { inventoryData } from '../utils/data'
 import { RiDeleteBin6Line } from "react-icons/ri";
 
@@ -6,9 +6,21 @@ import { MdOutlineKeyboardArrowUp } from "react-icons/md";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { useSelector } from 'react-redux';
 import type { RootState } from '../redux/store';
+import { SearchContext } from '../App';
 
 const InventoryTable = () => {
+      const search = useContext(SearchContext);
     const inventoryData = useSelector((state: RootState) => state.inventory)
+
+    console.log('inventoryData', inventoryData)
+
+    const filterData = inventoryData.filter((item) =>
+        item.name.toLowerCase().includes(search.searchValue.toLowerCase()
+        ) ||
+        item.code.includes(search.searchValue.toLowerCase())
+    );
+
+    console.log('filterData', filterData)
 
     const [showTable, setShowTAble] = useState(false)
 
@@ -31,7 +43,7 @@ const InventoryTable = () => {
                 </thead>
                 <tbody className='rounded-b-md'>
                     {
-                        inventoryData.map(({ id, code, name, category, feeLevel, amount, gap }) => (
+                        filterData.map(({ id, code, name, category, feeLevel, amount, gap }) => (
                             <tr key={id} className='hover:bg-[#1e2a3c]'>
                                 <td className={`p-2 border border-[#a4a4a442] text-gray-300 ${typeof id === 'string' ? 'text-left' : 'text-right'}`}>{id}</td>
                                 <td className={`p-2 border border-[#a4a4a442] text-gray-300 ${typeof code === 'string' ? 'text-left' : 'text-right'}`}>{code}</td>
