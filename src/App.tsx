@@ -12,7 +12,7 @@ const [searchValue,setSeaechValue] = useState("")
   return (
     <SearchContext.Provider value={{searchValue,setSeaechValue}}>
     <Routes>
-      <Route path='/login' element={<Login />} />
+      <Route path='/' element={<Login />} />
       <Route path='/quote' element={<Quote />} />
     </Routes>
 
