@@ -13,7 +13,7 @@ const Quote = () => {
   const dispatch = useDispatch()
   const [searchValue, setSearchValue] = useState('')
   const userData = useSelector((state: RootState) => state.user.user)
-  const inventoryData = useSelector((state: RootState) => state.inventory)
+  const {inventoryData} = useSelector((state: RootState) => state.inventory)
 
   const searchItem = searchValue && inventoryData.filter(inventory => inventory.name.toLowerCase().includes(searchValue.toLowerCase()) || inventory.code.includes(searchValue))
 

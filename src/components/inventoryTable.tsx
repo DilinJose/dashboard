@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import type { RootState } from '../redux/store';
 
 const InventoryTable = () => {
-    const inventoryData = useSelector((state: RootState) => state.inventory)
+    const inventoryData = useSelector((state: RootState) => state.inventory.inventoryData)
 
     const [showTable, setShowTAble] = useState(false)
 
